@@ -1,0 +1,10 @@
+{
+    "name": "jorge/login",
+    "description": "Proyecto que solo sirve para probar heroku..",
+    "authors": [
+        {
+            "name": "Jorge Luis"
+        }
+    ],
+    "require": {}
+}
