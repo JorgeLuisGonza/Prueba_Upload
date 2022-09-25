@@ -25,18 +25,32 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
   $name = $_POST['name'];
   $password = $_POST['password'];
   $auth = false;
-  $user = "";
+  $user = false;
   $pass= "";
 
   foreach($usuarios as $usuario){
     if($usuario['Usuario'] === $name && $usuario['Password'] === $password){
       $auth = true;
-      $user = $usuario['Usuario'];
-      $pass = $usuario['Password'];
     }
   }
   if($auth){ 
     header("location: autorizado.php");
+  }else{
+    foreach($usuarios as $usuario){
+    if($usuario['Usuario'] === $name ){
+      $user = true;
+      $pass = $usuario['Password'];
+    }
+  }
+  }
+
+  if ($user === false){
+    $error = "El usuario no existe";
+  }
+  if($user){
+      if($password != $pass){
+        $error = 'La contraseña es incorrecta';
+      }
   }
 }
 ?>
@@ -63,10 +77,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 <div class="contenedor alerta">
       <p><?php if($error != ""){echo $error;} ?></p>
 </div>
-
-  
-
-
 
 <script src="js.js"></script>
 </body>
